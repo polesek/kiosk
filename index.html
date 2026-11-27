@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src * data:; media-src *; connect-src *; frame-src 'none'; object-src 'none'; base-uri 'none'">
 <title>Kiosk</title>
-<meta name="theme-color" content="#0b5fff">
+<meta name="theme-color" content="#0b0d12">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon.svg">
 <link rel="stylesheet" href="style.css">
@@ -13,16 +13,18 @@
 <body>
 <div id="app">
   <div id="scrim"></div>
+
   <aside id="side">
     <div class="brand">Kiosk</div>
     <nav id="nav">
-      <button data-view="all">All <span class="n" id="n-all"></span></button>
+      <button data-view="all">For you <span class="n" id="n-all"></span></button>
       <button data-view="unread">Unread <span class="n" id="n-unread"></span></button>
       <button data-view="star">Starred <span class="n" id="n-star"></span></button>
     </nav>
     <div id="feeds"></div>
     <div class="side-actions">
-      <button id="btn-add" class="primary">+ Add sources</button>
+      <button id="btn-add" class="primary">✦ Choose interests &amp; sources</button>
+      <button id="btn-url">Add a site by URL</button>
       <button id="btn-import">Import OPML</button>
       <button id="btn-export">Export OPML</button>
       <button id="btn-settings">Settings</button>
@@ -30,46 +32,60 @@
     </div>
   </aside>
 
-  <main id="list">
-    <header>
-      <button id="btn-menu" class="icon" aria-label="Menu">☰</button>
-      <h1 id="title">All</h1>
-      <input id="search" type="search" placeholder="Search  ( / )" autocomplete="off">
-      <button id="btn-unread" class="icon" title="Show unread only" aria-pressed="false">●</button>
-      <button id="btn-refresh" class="icon" title="Refresh (r)" aria-label="Refresh">⟳</button>
+  <main id="feedwrap">
+    <header id="bar">
+      <button id="btn-menu" class="icon glass" aria-label="Menu">☰</button>
+      <h1 id="title">For you</h1>
+      <span class="grow"></span>
+      <button id="btn-search" class="icon glass" aria-label="Search" title="Search ( / )">⌕</button>
+      <button id="btn-shuffle" class="icon glass" title="Shuffle" aria-label="Shuffle">⇄</button>
+      <button id="btn-refresh" class="icon glass" title="Refresh (r)" aria-label="Refresh">⟳</button>
     </header>
+    <div id="searchrow" hidden><input id="search" type="search" placeholder="Search articles" autocomplete="off"></div>
     <div id="progress"></div>
-    <ul id="items"></ul>
-    <p id="empty" hidden></p>
+    <div id="feed" tabindex="-1"></div>
   </main>
-
-  <article id="reader">
-    <div id="reader-empty">Select an article<br><small>j / k to move · o open · s star · m read · r refresh</small></div>
-    <div id="reader-body" hidden></div>
-  </article>
 </div>
 
-<dialog id="dlg-add">
-  <form method="dialog" class="dlg-head"><h2>Add sources</h2><button class="icon" aria-label="Close">✕</button></form>
-  <div class="tabs">
-    <button data-tab="catalog" class="on">Catalog</button>
-    <button data-tab="url">By site or feed URL</button>
-  </div>
-  <section id="tab-catalog">
-    <div class="chips" id="lang-chips">
-      <button data-lang="" class="on">All</button>
-      <button data-lang="pl">Polski</button>
-      <button data-lang="en">English</button>
+<!-- Full article -->
+<section id="reader" aria-hidden="true" aria-label="Article">
+  <div class="sheet">
+    <div class="r-top">
+      <button id="r-close" class="icon" aria-label="Close">✕</button>
+      <span class="grow"></span>
+      <button id="r-star" class="icon" aria-label="Star">☆</button>
+      <button id="r-orig" class="icon" aria-label="Open original" title="Open original (o)">↗</button>
     </div>
-    <div id="catalog"></div>
-  </section>
-  <section id="tab-url" hidden>
-    <form id="url-form">
-      <input id="url-input" type="text" inputmode="url" placeholder="https://example.com or feed URL" required>
-      <button class="primary">Find feed</button>
-    </form>
-    <p id="url-msg" class="muted"></p>
-  </section>
+    <div id="reader-body"></div>
+  </div>
+</section>
+
+<!-- Personalization -->
+<section id="onboard" hidden aria-label="Choose your interests">
+  <div class="ob-wrap">
+    <header class="ob-head">
+      <div><h1>Make Kiosk yours</h1><p>Tap what you're into. We suggest sources as you go — keep the ones you like.</p></div>
+      <button id="ob-skip" class="ghost">Skip for now</button>
+    </header>
+    <div class="ob-langs" id="ob-langs">
+      <button data-lang="pl" class="on">🇵🇱 Polski</button>
+      <button data-lang="en" class="on">🇬🇧 English</button>
+    </div>
+    <div id="ob-tiles" class="tiles"></div>
+    <input id="ob-search" type="search" placeholder="Looking for a specific site?" autocomplete="off">
+    <div id="ob-sugg"></div>
+    <p class="ob-url"><button id="ob-url" class="link">Add a site by URL instead</button></p>
+  </div>
+  <footer class="ob-bar"><span id="ob-count" class="muted"></span><button id="ob-start" class="primary big" disabled>Start reading</button></footer>
+</section>
+
+<dialog id="dlg-add">
+  <form method="dialog" class="dlg-head"><h2>Add a site by URL</h2><button class="icon" aria-label="Close">✕</button></form>
+  <form id="url-form">
+    <input id="url-input" type="text" inputmode="url" placeholder="https://example.com or feed URL" required>
+    <button class="primary">Find feed</button>
+  </form>
+  <p id="url-msg" class="muted"></p>
 </dialog>
 
 <dialog id="dlg-settings">
@@ -78,11 +94,15 @@
     <input id="set-proxy" type="url" placeholder="https://your-worker.workers.dev (empty = same origin)">
     <small class="muted">Cloudflare Worker from worker.js. Leave empty when running dev_server.py.</small>
   </label>
-  <label class="field row"><input id="set-unread" type="checkbox"> Show unread only by default</label>
+  <label class="field">Article order
+    <select id="set-order"><option value="shuffle">Shuffled mix of all sources</option><option value="newest">Newest first</option></select>
+  </label>
+  <label class="field row"><input id="set-unread" type="checkbox"> Hide articles I've already seen</label>
   <button id="btn-clear" class="danger">Delete all articles</button>
 </dialog>
 
 <div id="toast" role="status"></div>
+<script src="vendor/Readability.js"></script>
 <script type="module" src="app.js"></script>
 </body>
 </html>

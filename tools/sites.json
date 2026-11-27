@@ -1,0 +1,1025 @@
+[
+ {
+  "site": "https://fakt.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://se.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://wyborcza.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://polityka.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://wprost.pl",
+  "cat": "Polska",
+  "lang": "pl",
+  "name": "Wprost"
+ },
+ {
+  "site": "https://dorzeczy.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://tygodnikpowszechny.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://pap.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://polskieradio.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://radiozet.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://tokfm.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://dziennik.pl",
+  "cat": "Polska",
+  "lang": "pl",
+  "name": "Dziennik.pl"
+ },
+ {
+  "site": "https://rp.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://gazetaprawna.pl",
+  "cat": "Polska",
+  "lang": "pl",
+  "name": "Gazeta Prawna"
+ },
+ {
+  "site": "https://polskatimes.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://wiadomosci.gazeta.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://tvp.info",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://polsatnews.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://tvn24.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://rmf24.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://interia.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://newsweek.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://oko.press",
+  "cat": "Polska",
+  "lang": "pl",
+  "name": "OKO.press"
+ },
+ {
+  "site": "https://krytykapolityczna.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://natemat.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://o2.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://dw.com/pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://wiadomosci.onet.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://wiadomosci.wp.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://wpolityce.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://niezalezna.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://pch24.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://onet.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://rmf.fm",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://tygodnik-solidarnosc.com",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://dobrewiadomosci.net.pl",
+  "cat": "Polska",
+  "lang": "pl"
+ },
+ {
+  "site": "https://money.pl",
+  "cat": "Biznes PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://pb.pl",
+  "cat": "Biznes PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://forsal.pl",
+  "cat": "Biznes PL",
+  "lang": "pl",
+  "name": "Forsal"
+ },
+ {
+  "site": "https://parkiet.com",
+  "cat": "Biznes PL",
+  "lang": "pl",
+  "name": "Parkiet"
+ },
+ {
+  "site": "https://bankier.pl",
+  "cat": "Biznes PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://businessinsider.com.pl",
+  "cat": "Biznes PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://egospodarka.pl",
+  "cat": "Biznes PL",
+  "lang": "pl",
+  "name": "eGospodarka"
+ },
+ {
+  "site": "https://wnp.pl",
+  "cat": "Biznes PL",
+  "lang": "pl",
+  "name": "WNP"
+ },
+ {
+  "site": "https://300gospodarka.pl",
+  "cat": "Biznes PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://obserwatorfinansowy.pl",
+  "cat": "Biznes PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://strefainwestorow.pl",
+  "cat": "Biznes PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://bizblog.pl",
+  "cat": "Biznes PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://rynekzdrowia.pl",
+  "cat": "Biznes PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://spidersweb.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://antyweb.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://niebezpiecznik.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://chip.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://komputerswiat.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://pcworld.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://telepolis.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://benchmark.pl",
+  "cat": "Tech PL",
+  "lang": "pl",
+  "name": "Benchmark.pl"
+ },
+ {
+  "site": "https://purepc.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://android.com.pl",
+  "cat": "Tech PL",
+  "lang": "pl",
+  "name": "Android.com.pl"
+ },
+ {
+  "site": "https://gadzetomania.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://tabletowo.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://dobreprogramy.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://gry-online.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://gram.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://cdaction.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://sekurak.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://zaufanatrzeciastrona.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://geekweek.interia.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://ppe.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://komorkomania.pl",
+  "cat": "Tech PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://focus.pl",
+  "cat": "Nauka PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://naukawpolsce.pl",
+  "cat": "Nauka PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://kopalniawiedzy.pl",
+  "cat": "Nauka PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://national-geographic.pl",
+  "cat": "Nauka PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://wiedzaiżycie.pl",
+  "cat": "Nauka PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://crazynauka.pl",
+  "cat": "Nauka PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://sport.pl",
+  "cat": "Sport PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://przegladsportowy.onet.pl",
+  "cat": "Sport PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://pilkanozna.pl",
+  "cat": "Sport PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://weszlo.com",
+  "cat": "Sport PL",
+  "lang": "pl",
+  "name": "Weszło"
+ },
+ {
+  "site": "https://goal.pl",
+  "cat": "Sport PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://sportowefakty.wp.pl",
+  "cat": "Sport PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://meczyki.pl",
+  "cat": "Sport PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://eurosport.pl",
+  "cat": "Sport PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://sport.tvp.pl",
+  "cat": "Sport PL",
+  "lang": "pl",
+  "name": "Sport TVP"
+ },
+ {
+  "site": "https://transfery.info",
+  "cat": "Sport PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://filmweb.pl",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://stopklatka.pl",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://antyradio.pl",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://kultura.onet.pl",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://auto-swiat.pl",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://moto.pl",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://motofakty.pl",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://fotopolis.pl",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://wysokieobcasy.pl",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://dwutygodnik.com",
+  "cat": "Kultura i moto PL",
+  "lang": "pl"
+ },
+ {
+  "site": "https://apnews.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://reuters.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://bbc.com/news",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://theguardian.com/international",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://aljazeera.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://dw.com/en",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://france24.com/en",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://euronews.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://cnn.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://nytimes.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://washingtonpost.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://economist.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://ft.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://bloomberg.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://politico.eu",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://politico.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://axios.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://vox.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://theatlantic.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://newyorker.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://time.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://newsweek.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://usatoday.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://huffpost.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://npr.org",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://pbs.org/newshour",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://abcnews.go.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://cbsnews.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://nbcnews.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://foxnews.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://latimes.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://wsj.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://theintercept.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://propublica.org",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://slate.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://notesfrompoland.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://thefirstnews.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://tvpworld.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://rferl.org",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://thediplomat.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://foreignpolicy.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://foreignaffairs.com",
+  "cat": "World",
+  "lang": "en"
+ },
+ {
+  "site": "https://bbc.co.uk/news",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://independent.co.uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://telegraph.co.uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://thetimes.co.uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://news.sky.com",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://dailymail.co.uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://mirror.co.uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://metro.co.uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://standard.co.uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://inews.co.uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://channel4.com/news",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://spectator.co.uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://newstatesman.com",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://theguardian.com/uk",
+  "cat": "United Kingdom",
+  "lang": "en"
+ },
+ {
+  "site": "https://theverge.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://arstechnica.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://techcrunch.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://wired.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://engadget.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://gizmodo.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://cnet.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://zdnet.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://theregister.com",
+  "cat": "Tech",
+  "lang": "en",
+  "name": "The Register"
+ },
+ {
+  "site": "https://venturebeat.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://mashable.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://9to5mac.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://9to5google.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://androidauthority.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://tomshardware.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://hackaday.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://slashdot.org",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://news.ycombinator.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://lobste.rs",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://techradar.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://bleepingcomputer.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://krebsonsecurity.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://thehackernews.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://darkreading.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://macrumors.com",
+  "cat": "Tech",
+  "lang": "en"
+ },
+ {
+  "site": "https://sciencedaily.com",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://newscientist.com",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://nature.com",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://science.org",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://scientificamerican.com",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://phys.org",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://space.com",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://nasa.gov",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://quantamagazine.org",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://livescience.com",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://popsci.com",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://nationalgeographic.com",
+  "cat": "Science",
+  "lang": "en"
+ },
+ {
+  "site": "https://forbes.com",
+  "cat": "Business & Economy",
+  "lang": "en"
+ },
+ {
+  "site": "https://businessinsider.com",
+  "cat": "Business & Economy",
+  "lang": "en"
+ },
+ {
+  "site": "https://cnbc.com",
+  "cat": "Business & Economy",
+  "lang": "en"
+ },
+ {
+  "site": "https://marketwatch.com",
+  "cat": "Business & Economy",
+  "lang": "en"
+ },
+ {
+  "site": "https://fortune.com",
+  "cat": "Business & Economy",
+  "lang": "en"
+ },
+ {
+  "site": "https://finance.yahoo.com",
+  "cat": "Business & Economy",
+  "lang": "en"
+ },
+ {
+  "site": "https://espn.com",
+  "cat": "Sports",
+  "lang": "en"
+ },
+ {
+  "site": "https://bbc.com/sport",
+  "cat": "Sports",
+  "lang": "en"
+ },
+ {
+  "site": "https://skysports.com",
+  "cat": "Sports",
+  "lang": "en"
+ },
+ {
+  "site": "https://cbssports.com",
+  "cat": "Sports",
+  "lang": "en"
+ },
+ {
+  "site": "https://goal.com",
+  "cat": "Sports",
+  "lang": "en"
+ },
+ {
+  "site": "https://sportingnews.com",
+  "cat": "Sports",
+  "lang": "en"
+ },
+ {
+  "site": "https://eurosport.com",
+  "cat": "Sports",
+  "lang": "en"
+ }
+]
