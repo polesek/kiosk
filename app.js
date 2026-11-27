@@ -62,11 +62,14 @@ if (store.get("schema", 1) < 2) {
 let articles = [];
 let view = { kind: "all", feed: null, cat: null };
 let query = "";
-let unreadOnly = store.get("unreadOnly", false);
+let unreadOnly = store.get("unreadOnly", true);
+let order = store.get("order", "shuffle"); // "shuffle" | "newest"
+let seed = Math.random();
+let shown = 30;
 let selectedId = null;
 let refreshing = false;
 let visibleIds = [];
-const PER_FEED = 150, RENDER_CAP = 300;
+const PER_FEED = 150, PAGE = 30;
 
 /* ---------- networking ---------- */
 function proxyUrl(u) {
@@ -196,7 +199,30 @@ function filtered() {
   else if (view.kind === "cat") { const urls = new Set(feeds.filter((f) => (f.cat || "Other") === view.cat).map((f) => f.url)); list = list.filter((a) => urls.has(a.feed)); }
   if (unreadOnly && !["unread", "star"].includes(view.kind)) list = list.filter((a) => !a.read || a.id === selectedId);
   if (query) { const q = query.toLowerCase(); list = list.filter((a) => a.title.toLowerCase().includes(q) || a.snippet.toLowerCase().includes(q)); }
-  return list.sort((a, b) => b.date - a.date);
+  list = [...list].sort((a, b) => b.date - a.date);
+  return order === "shuffle" && !query && view.kind !== "star" ? mix(list) : list;
+}
+
+// Stable pseudo-random key in [0,1) for an id + the current seed, so the order doesn't jump
+// when articles are marked read or the list re-renders. Changing `seed` reshuffles.
+function rand(str) {
+  let h = 2166136261 ^ Math.floor(seed * 4294967296);
+  for (let i = 0; i < str.length; i++) h = Math.imul(h ^ str.charCodeAt(i), 16777619);
+  h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16; // avalanche
+  return (h >>> 0) / 4294967296;
+}
+// Shuffle each source's articles, then deal them out in rounds: every round takes one article from
+// each source that still has some, with the sources in a fresh random order each time. This keeps one
+// busy outlet from filling the list without the result looking like a fixed rotation.
+function mix(list) {
+  const lanes = new Map();
+  for (const a of list) (lanes.get(a.feed) || lanes.set(a.feed, []).get(a.feed)).push(a);
+  const ordered = [...lanes.entries()].map(([f, l]) => [f, l.sort((x, y) => rand(x.id) - rand(y.id))]);
+  const out = [];
+  for (let i = 0; ordered.some(([, l]) => i < l.length); i++) {
+    ordered.filter(([, l]) => i < l.length).sort((x, y) => rand(x[0] + "#" + i) - rand(y[0] + "#" + i)).forEach(([, l]) => out.push(l[i]));
+  }
+  return out;
 }
 
 function renderSide() {
@@ -215,14 +241,15 @@ function renderSide() {
 
 function renderList() {
   const list = filtered();
-  visibleIds = list.slice(0, RENDER_CAP).map((a) => a.id);
-  $("#items").innerHTML = list.slice(0, RENDER_CAP).map((a) => {
+  const page = list.slice(0, shown);
+  visibleIds = page.map((a) => a.id);
+  $("#items").innerHTML = page.map((a) => {
     const f = feedOf(a.feed);
     return `<li class="item ${a.read ? "read" : "unread"} ${a.id === selectedId ? "sel" : ""}" data-id="${esc(a.id)}">
       <div class="txt"><div class="meta"><span class="src">${esc(f?.name || "")}</span><span>· ${ago(a.date)}</span>${a.star ? '<span class="star">★</span>' : ""}</div>
       <div class="ttl">${esc(a.title)}</div><div class="snip">${esc(a.snippet)}</div></div>
       ${a.img ? `<img src="${esc(a.img)}" alt="" loading="lazy" referrerpolicy="no-referrer">` : ""}</li>`;
-  }).join("");
+  }).join("") + (list.length > shown ? `<li class="more"><button id="more">Show ${Math.min(PAGE, list.length - shown)} more <span class="muted">(${list.length - shown} left)</span></button></li>` : "");
   const empty = $("#empty");
   empty.hidden = list.length > 0;
   if (!list.length) {
@@ -232,6 +259,7 @@ function renderList() {
   $("#btn-unread").setAttribute("aria-pressed", String(unreadOnly));
   const t = view.kind === "feed" ? feedOf(view.feed)?.name : view.kind === "cat" ? view.cat : { all: "All", unread: "Unread", star: "Starred" }[view.kind];
   $("#title").textContent = t || "All";
+  $("#btn-shuffle").classList.toggle("on", order === "shuffle");
 }
 
 function renderReader() {
@@ -261,7 +289,7 @@ function renderAll() { renderSide(); renderList(); }
 
 /* ---------- actions ---------- */
 function setView(v) {
-  view = v; selectedId = null;
+  view = v; selectedId = null; shown = PAGE;
   $("#app").classList.remove("menu", "reading");
   renderAll(); renderReader(); $("#items").scrollTop = 0;
 }
@@ -302,15 +330,35 @@ async function removeFeed(url) {
 }
 
 /* ---------- add dialog ---------- */
-let langFilter = "";
+const picked = new Set();          // catalog URLs ticked in the picker
+const langSel = new Set(["pl", "en"]);
+let catFilter = "";
 function renderCatalog() {
   const have = new Set(feeds.map((f) => f.url));
+  const q = $("#cat-search").value.trim().toLowerCase();
+  const pool = CATALOG.filter((s) => langSel.has(s.lang));
+  const counts = {};
+  for (const s of pool) counts[s.cat] = (counts[s.cat] || 0) + 1;
+  if (catFilter && !counts[catFilter]) catFilter = "";
+  $("#cat-chips").innerHTML = `<button data-cat="" class="${catFilter ? "" : "on"}">All <small>${pool.length}</small></button>` +
+    Object.entries(counts).map(([c, n]) => `<button data-cat="${esc(c)}" class="${catFilter === c ? "on" : ""}">${esc(c)} <small>${n}</small></button>`).join("");
+  const shown = pool.filter((s) => (!catFilter || s.cat === catFilter) && (!q || `${s.name} ${s.cat} ${s.url}`.toLowerCase().includes(q)));
   const groups = {};
-  for (const s of CATALOG) if (!langFilter || s.lang === langFilter) (groups[s.cat] ||= []).push(s);
-  $("#catalog").innerHTML = Object.entries(groups).map(([c, ss]) =>
-    `<div class="cat-h">${esc(c)}</div>` + ss.map((s) =>
-      `<div class="cat-item"><span class="nm">${esc(s.name)} <small class="muted">${s.lang.toUpperCase()}</small></span><button data-add="${esc(s.url)}" class="${have.has(s.url) ? "added" : ""}">${have.has(s.url) ? "Added ✓" : "Add"}</button></div>`).join("")
-  ).join("");
+  for (const s of shown) (groups[s.cat] ||= []).push(s);
+  $("#catalog").innerHTML = Object.entries(groups).map(([c, ss]) => {
+    const free = ss.filter((x) => !have.has(x.url));
+    const all = free.length && free.every((x) => picked.has(x.url));
+    return `<div class="cat-h"><span>${esc(c)}</span>${free.length ? `<button data-all="${esc(c)}">${all ? "Clear" : "Select all"}</button>` : ""}</div>` +
+      ss.map((x) => have.has(x.url)
+        ? `<div class="cat-item added"><span class="nm">${esc(x.name)}</span><span class="muted">Added ✓</span></div>`
+        : `<label class="cat-item"><input type="checkbox" data-pick="${esc(x.url)}" ${picked.has(x.url) ? "checked" : ""}><span class="nm">${esc(x.name)}</span><small class="muted">${x.lang.toUpperCase()}</small></label>`).join("");
+  }).join("") || `<p class="muted pad">No sources match.</p>`;
+  updatePickBar();
+}
+function updatePickBar() {
+  $("#pick-count").textContent = picked.size ? `${picked.size} selected` : "Tick the sources you want";
+  $("#btn-add-picked").disabled = !picked.size;
+  $("#btn-add-picked").textContent = picked.size ? `Add ${picked.size} source${picked.size > 1 ? "s" : ""}` : "Add";
 }
 async function discover(input) {
   let u = input.trim();
@@ -359,7 +407,14 @@ $("#feeds").addEventListener("click", (e) => {
   const c = e.target.closest("[data-cat]"); if (c) setView({ kind: "cat", cat: c.dataset.cat });
 });
 $("#feeds").addEventListener("keydown", (e) => { if (e.key === "Enter" && e.target.dataset.feed) setView({ kind: "feed", feed: e.target.dataset.feed }); });
-$("#items").addEventListener("click", (e) => { const li = e.target.closest(".item"); if (li) open(li.dataset.id); });
+$("#items").addEventListener("click", (e) => {
+  if (e.target.closest("#more")) { shown += PAGE; return renderList(); }
+  const li = e.target.closest(".item"); if (li) open(li.dataset.id);
+});
+$("#btn-shuffle").onclick = () => {
+  if (order !== "shuffle") { order = "shuffle"; store.set("order", order); }
+  seed = Math.random(); shown = PAGE; selectedId = null; renderList(); renderReader(); $("#items").scrollTop = 0;
+};
 $("#reader").addEventListener("click", (e) => {
   const id = e.target.id;
   if (id === "r-back") { $("#app").classList.remove("reading"); }
@@ -373,9 +428,16 @@ $("#btn-refresh").onclick = () => refreshAll();
 $("#btn-unread").onclick = () => { unreadOnly = !unreadOnly; store.set("unreadOnly", unreadOnly); renderList(); };
 let st; $("#search").oninput = (e) => { clearTimeout(st); st = setTimeout(() => { query = e.target.value.trim(); renderList(); }, 120); };
 
-const openAdd = () => { $("#app").classList.remove("menu"); renderCatalog(); $("#dlg-add").showModal(); };
-$("#btn-add").onclick = openAdd;
+function openAdd(first = false) {
+  $("#app").classList.remove("menu");
+  $("#dlg-add").classList.toggle("first", first === true);
+  $("#add-title").textContent = first === true ? "What do you want to read?" : "Add sources";
+  $("#add-intro").hidden = first !== true;
+  renderCatalog(); $("#dlg-add").showModal();
+}
+$("#btn-add").onclick = () => openAdd();
 $("#empty").addEventListener("click", (e) => { if (e.target.id === "empty-add") openAdd(); });
+$("#dlg-add").addEventListener("close", () => store.set("onboarded", true));
 $("#dlg-add .tabs").addEventListener("click", (e) => {
   const b = e.target.closest("button"); if (!b) return;
   $$("#dlg-add .tabs button").forEach((x) => x.classList.toggle("on", x === b));
@@ -383,13 +445,33 @@ $("#dlg-add .tabs").addEventListener("click", (e) => {
 });
 $("#lang-chips").addEventListener("click", (e) => {
   const b = e.target.closest("button"); if (!b) return;
-  langFilter = b.dataset.lang; $$("#lang-chips button").forEach((x) => x.classList.toggle("on", x === b)); renderCatalog();
+  const l = b.dataset.lang;
+  if (langSel.has(l)) { if (langSel.size === 1) return; langSel.delete(l); } else langSel.add(l);
+  $$("#lang-chips button").forEach((x) => x.classList.toggle("on", langSel.has(x.dataset.lang)));
+  renderCatalog();
 });
-$("#catalog").addEventListener("click", async (e) => {
-  const b = e.target.closest("[data-add]"); if (!b) return;
-  const s = CATALOG.find((x) => x.url === b.dataset.add);
-  if (await addFeed(s)) { b.textContent = "Added ✓"; b.classList.add("added"); }
+$("#cat-chips").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { catFilter = b.dataset.cat; renderCatalog(); } });
+$("#cat-search").addEventListener("input", () => renderCatalog());
+$("#catalog").addEventListener("change", (e) => {
+  const u = e.target.dataset.pick; if (!u) return;
+  e.target.checked ? picked.add(u) : picked.delete(u); updatePickBar();
 });
+$("#catalog").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-all]"); if (!b) return;
+  const have = new Set(feeds.map((f) => f.url));
+  const q = $("#cat-search").value.trim().toLowerCase();
+  const group = CATALOG.filter((x) => x.cat === b.dataset.all && langSel.has(x.lang) && !have.has(x.url) && (!q || `${x.name} ${x.cat} ${x.url}`.toLowerCase().includes(q)));
+  const all = group.every((x) => picked.has(x.url));
+  group.forEach((x) => (all ? picked.delete(x.url) : picked.add(x.url)));
+  renderCatalog();
+});
+$("#btn-add-picked").onclick = () => {
+  const chosen = CATALOG.filter((x) => picked.has(x.url) && !feeds.some((f) => f.url === x.url));
+  const added = chosen.map(({ url, name, cat, lang }) => ({ url, name, cat, lang }));
+  feeds.push(...added); store.set("feeds", feeds); picked.clear();
+  $("#dlg-add").close(); renderAll(); refreshAll(added);
+  toast(`Added ${added.length} source${added.length === 1 ? "" : "s"}`);
+};
 $("#url-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const msg = $("#url-msg"); msg.textContent = "Looking for feeds…"; msg.replaceChildren(msg.firstChild);
@@ -410,9 +492,10 @@ $("#url-form").addEventListener("submit", async (e) => {
 $("#btn-import").onclick = () => $("#file-opml").click();
 $("#file-opml").onchange = async (e) => { const f = e.target.files[0]; if (f) importOPML(await f.text()); e.target.value = ""; };
 $("#btn-export").onclick = exportOPML;
-$("#btn-settings").onclick = () => { $("#app").classList.remove("menu"); $("#set-proxy").value = store.get("proxy", ""); $("#set-unread").checked = unreadOnly; $("#dlg-settings").showModal(); };
+$("#btn-settings").onclick = () => { $("#app").classList.remove("menu"); $("#set-proxy").value = store.get("proxy", ""); $("#set-unread").checked = unreadOnly; $("#set-order").value = order; $("#dlg-settings").showModal(); };
 $("#dlg-settings").addEventListener("close", () => {
-  store.set("proxy", $("#set-proxy").value.trim()); unreadOnly = $("#set-unread").checked; store.set("unreadOnly", unreadOnly); renderList();
+  store.set("proxy", $("#set-proxy").value.trim()); unreadOnly = $("#set-unread").checked; store.set("unreadOnly", unreadOnly);
+  order = $("#set-order").value; store.set("order", order); shown = PAGE; renderList();
 });
 $("#btn-clear").onclick = async () => {
   if (!confirm("Delete all stored articles (including starred)?")) return;
@@ -438,6 +521,7 @@ document.addEventListener("keydown", (e) => {
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
   const stale = Date.now() - store.get("lastRefresh", 0) > 15 * 60 * 1000;
   if (stale || !articles.length) refreshAll();
+  if (!feeds.length && !store.get("onboarded", false)) openAdd(true); // first run: personalization screen
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden && Date.now() - store.get("lastRefresh", 0) > 15 * 60 * 1000) refreshAll();
   });
