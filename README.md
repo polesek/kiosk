@@ -7,9 +7,11 @@ Feeds are fetched by the browser through a tiny CORS proxy; articles are stored 
     python3 dev_server.py 8080      # then open http://localhost:8080
 
 ## Deploy (free)
-1. Proxy: `npx wrangler deploy worker.js --name kiosk-proxy` (Cloudflare Workers free tier).
-2. App: host this folder on any static host (Cloudflare Pages, GitHub Pages, Netlify).
-3. In the app: Settings → Proxy URL → `https://kiosk-proxy.<you>.workers.dev`.
+**Vercel** (simplest): import the repo in Vercel and deploy. `api/proxy.js` + `vercel.json` provide the `/proxy` endpoint
+on the same origin, so Settings → Proxy URL stays empty.
+
+**Cloudflare**: `npx wrangler deploy worker.js --name kiosk-proxy`, host the folder on any static host (Pages, GitHub Pages,
+Netlify), then set Settings → Proxy URL → `https://kiosk-proxy.<you>.workers.dev`.
 
 ## Using it
 A vertical, full-screen card feed (swipe or scroll; one article per screen). Tap a card to read the full article,
