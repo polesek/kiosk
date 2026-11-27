@@ -66,6 +66,7 @@ input[type=search], input[type=text], input[type=url] { background: var(--bg2); 
 .item .star { color: #e5a400; }
 .item img { width: 76px; height: 76px; object-fit: cover; border-radius: 8px; background: var(--bg3); flex: none; }
 #empty { position: absolute; inset: 70px 0 auto 0; text-align: center; color: var(--muted); padding: 48px 24px; margin: 0; pointer-events: none; }
+#empty button { pointer-events: auto; margin-top: 4px; }
 
 /* reader */
 #reader { overflow-y: auto; min-width: 0; padding-bottom: env(safe-area-inset-bottom); }

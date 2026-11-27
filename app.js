@@ -51,10 +51,13 @@ const DB = (() => {
 })();
 
 /* ---------- state ---------- */
-let feeds = store.get("feeds", null);
-if (!feeds) {
-  feeds = CATALOG.filter((s) => s.starter).map(({ url, name, cat, lang }) => ({ url, name, cat, lang }));
-  store.set("feeds", feeds);
+let feeds = store.get("feeds", []);
+// One-time reset: schema 1 shipped with pre-subscribed starter feeds. Start empty instead.
+// Safe to delete once every browser using the app has run it.
+if (store.get("schema", 1) < 2) {
+  feeds = [];
+  store.set("feeds", feeds); store.set("lastRefresh", 0); store.set("schema", 2);
+  DB.clear().catch(() => {});
 }
 let articles = [];
 let view = { kind: "all", feed: null, cat: null };
@@ -222,7 +225,10 @@ function renderList() {
   }).join("");
   const empty = $("#empty");
   empty.hidden = list.length > 0;
-  if (!list.length) empty.textContent = !feeds.length ? "No sources yet. Tap “Add sources”." : !articles.length ? "Loading… pull in articles with Refresh (r)." : query ? "No matches." : "Nothing here.";
+  if (!list.length) {
+    if (!feeds.length) empty.innerHTML = `<p>Nothing here yet.</p><button id="empty-add" class="primary">Add news sources</button>`;
+    else empty.textContent = !articles.length ? "Loading… pull in articles with Refresh (r)." : query ? "No matches." : "Nothing here.";
+  }
   $("#btn-unread").setAttribute("aria-pressed", String(unreadOnly));
   const t = view.kind === "feed" ? feedOf(view.feed)?.name : view.kind === "cat" ? view.cat : { all: "All", unread: "Unread", star: "Starred" }[view.kind];
   $("#title").textContent = t || "All";
@@ -367,7 +373,9 @@ $("#btn-refresh").onclick = () => refreshAll();
 $("#btn-unread").onclick = () => { unreadOnly = !unreadOnly; store.set("unreadOnly", unreadOnly); renderList(); };
 let st; $("#search").oninput = (e) => { clearTimeout(st); st = setTimeout(() => { query = e.target.value.trim(); renderList(); }, 120); };
 
-$("#btn-add").onclick = () => { $("#app").classList.remove("menu"); renderCatalog(); $("#dlg-add").showModal(); };
+const openAdd = () => { $("#app").classList.remove("menu"); renderCatalog(); $("#dlg-add").showModal(); };
+$("#btn-add").onclick = openAdd;
+$("#empty").addEventListener("click", (e) => { if (e.target.id === "empty-add") openAdd(); });
 $("#dlg-add .tabs").addEventListener("click", (e) => {
   const b = e.target.closest("button"); if (!b) return;
   $$("#dlg-add .tabs button").forEach((x) => x.classList.toggle("on", x === b));
