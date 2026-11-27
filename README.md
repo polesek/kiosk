@@ -15,10 +15,6 @@ which Kiosk fetches and extracts with [Mozilla Readability](https://github.com/m
 The sidebar only appears when you press ☰.
 Keys: j/k or ↓/↑ next/prev · Enter read · o open original · s star · r refresh · / search · Esc close
 
-## Paywalls
-Kiosk does not bypass paywalls. For subscriber-only articles (e.g. Onet Premium, Wyborcza) it shows what the publisher
-makes public and a button to open the article on their site, where you can sign in with your own subscription.
-
 ## Add sources
 First run opens a personalization screen: pick languages (Polski / English) and categories, tick sources, done.
 It is also available from the menu → Add sources. Any site URL works too (its feed is auto-discovered), as does OPML import/export.
