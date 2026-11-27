@@ -6,7 +6,7 @@ from urllib.parse import urlparse, parse_qs
 from urllib.request import Request, urlopen
 
 MAX_BYTES = 5 * 1024 * 1024
-UA = "Mozilla/5.0 (compatible; Feedlight/1.0)"
+UA = "Mozilla/5.0 (compatible; Kiosk/1.0)"
 # python.org builds on macOS ship without CA certs; fall back to the system bundle.
 CTX = ssl.create_default_context(cafile="/etc/ssl/cert.pem" if os.path.exists("/etc/ssl/cert.pem") else None)
 
@@ -59,5 +59,5 @@ class Handler(SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     port = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
-    print(f"Feedlight dev server: http://localhost:{port}")
+    print(f"Kiosk dev server: http://localhost:{port}")
     ThreadingHTTPServer(("127.0.0.1", port), Handler).serve_forever()

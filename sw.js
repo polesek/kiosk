@@ -1,4 +1,4 @@
-const CACHE = "feedlight-v1";
+const CACHE = "kiosk-v1";
 const SHELL = ["./", "index.html", "style.css", "app.js", "sources.js", "manifest.webmanifest", "icons/icon.svg"];
 
 self.addEventListener("install", (e) => {

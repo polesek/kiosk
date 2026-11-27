@@ -12,7 +12,7 @@ export default {
   async fetch(request) {
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS });
     const url = new URL(request.url);
-    if (url.pathname !== "/proxy") return new Response("Feedlight proxy", { headers: CORS });
+    if (url.pathname !== "/proxy") return new Response("Kiosk proxy", { headers: CORS });
 
     let target;
     try { target = new URL(url.searchParams.get("url")); } catch { return err("bad url", 400); }
@@ -21,7 +21,7 @@ export default {
     try {
       const res = await fetch(target, {
         headers: {
-          "User-Agent": "Mozilla/5.0 (compatible; Feedlight/1.0)",
+          "User-Agent": "Mozilla/5.0 (compatible; Kiosk/1.0)",
           Accept: "application/rss+xml, application/atom+xml, text/xml, text/html, */*",
         },
         cf: { cacheTtl: 300, cacheEverything: true },

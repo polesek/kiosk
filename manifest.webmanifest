@@ -1,6 +1,6 @@
 {
-  "name": "Feedlight",
-  "short_name": "Feedlight",
+  "name": "Kiosk",
+  "short_name": "Kiosk",
   "description": "A light, local-first news reader.",
   "start_url": "./",
   "scope": "./",
