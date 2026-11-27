@@ -340,8 +340,8 @@ function exportOPML() {
   const cats = {};
   for (const f of feeds) (cats[f.cat || "Other"] ||= []).push(f);
   const body = Object.entries(cats).map(([c, fs]) => `    <outline text="${esc(c)}">\n${fs.map((f) => `      <outline type="rss" text="${esc(f.name)}" title="${esc(f.name)}" xmlUrl="${esc(f.url)}"/>`).join("\n")}\n    </outline>`).join("\n");
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<opml version="2.0">\n  <head><title>Feedlight</title></head>\n  <body>\n${body}\n  </body>\n</opml>\n`;
-  const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(new Blob([xml], { type: "text/xml" })), download: "feedlight.opml" });
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<opml version="2.0">\n  <head><title>Kiosk</title></head>\n  <body>\n${body}\n  </body>\n</opml>\n`;
+  const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(new Blob([xml], { type: "text/xml" })), download: "kiosk.opml" });
   a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
