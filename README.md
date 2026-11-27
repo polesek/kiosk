@@ -15,5 +15,15 @@ Feeds are fetched by the browser through a tiny CORS proxy; articles are stored 
 j/k next/prev · o open original · s star · m read/unread · r refresh · / search · Esc back
 
 ## Add sources
-Catalog (Polish first, then world/tech), any site URL (auto-discovers its feed), or OPML import/export.
-`sources.js` is the catalog; every URL in it was checked to return items.
+First run opens a personalization screen: pick languages (Polski / English) and categories, tick sources, done.
+It is also available from the menu → Add sources. Any site URL works too (its feed is auto-discovered), as does OPML import/export.
+
+## The source catalog
+`sources.js` is **generated** — don't edit it by hand. `python3 tools/harvest.py` rebuilds it from:
+- `tools/curated.json` — hand-picked feeds
+- `tools/sites.json` — hand-picked site homepages (the feed is discovered automatically)
+- [plenaryapp/awesome-rss-feeds](https://github.com/plenaryapp/awesome-rss-feeds) (CC0) — OPML lists by country and topic
+- Wikidata — newspapers and news sites for Poland, the UK and the US
+
+Only feeds that currently return recent articles are kept. Wikidata rate-limits to ~1 query/minute, so a cold run takes
+~15 min; results are cached for 14 days in `tools/.cache/`. To add a source, put it in `curated.json` or `sites.json` and re-run.
