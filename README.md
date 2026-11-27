@@ -11,8 +11,15 @@ Feeds are fetched by the browser through a tiny CORS proxy; articles are stored 
 2. App: host this folder on any static host (Cloudflare Pages, GitHub Pages, Netlify).
 3. In the app: Settings → Proxy URL → `https://kiosk-proxy.<you>.workers.dev`.
 
-## Keys
-j/k next/prev · o open original · s star · m read/unread · r refresh · / search · Esc back
+## Using it
+A vertical, full-screen card feed (swipe or scroll; one article per screen). Tap a card to read the full article,
+which Kiosk fetches and extracts with [Mozilla Readability](https://github.com/mozilla/readability) (vendored in `vendor/`).
+The sidebar only appears when you press ☰.
+Keys: j/k or ↓/↑ next/prev · Enter read · o open original · s star · r refresh · / search · Esc close
+
+## Paywalls
+Kiosk does not bypass paywalls. For subscriber-only articles (e.g. Onet Premium, Wyborcza) it shows what the publisher
+makes public and a button to open the article on their site, where you can sign in with your own subscription.
 
 ## Add sources
 First run opens a personalization screen: pick languages (Polski / English) and categories, tick sources, done.
