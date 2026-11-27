@@ -6,10 +6,6 @@ Feeds are fetched by the browser through a tiny CORS proxy; articles are stored 
 ## Run locally
     python3 dev_server.py 8080      # then open http://localhost:8080
 
-## Deploy (free)
-**Vercel** (simplest): import the repo in Vercel and deploy. `api/proxy.js` + `vercel.json` provide the `/proxy` endpoint
-on the same origin, so Settings → Proxy URL stays empty.
-
 **Cloudflare**: `npx wrangler deploy worker.js --name kiosk-proxy`, host the folder on any static host (Pages, GitHub Pages,
 Netlify), then set Settings → Proxy URL → `https://kiosk-proxy.<you>.workers.dev`.
 
