@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src * data:; media-src *; connect-src *; frame-src 'none'; object-src 'none'; base-uri 'none'">
+<title>Feedlight</title>
+<meta name="theme-color" content="#0b5fff">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <div id="scrim"></div>
+  <aside id="side">
+    <div class="brand">Feedlight</div>
+    <nav id="nav">
+      <button data-view="all">All <span class="n" id="n-all"></span></button>
+      <button data-view="unread">Unread <span class="n" id="n-unread"></span></button>
+      <button data-view="star">Starred <span class="n" id="n-star"></span></button>
+    </nav>
+    <div id="feeds"></div>
+    <div class="side-actions">
+      <button id="btn-add" class="primary">+ Add sources</button>
+      <button id="btn-import">Import OPML</button>
+      <button id="btn-export">Export OPML</button>
+      <button id="btn-settings">Settings</button>
+      <input type="file" id="file-opml" accept=".opml,.xml,text/xml" hidden>
+    </div>
+  </aside>
+
+  <main id="list">
+    <header>
+      <button id="btn-menu" class="icon" aria-label="Menu">☰</button>
+      <h1 id="title">All</h1>
+      <input id="search" type="search" placeholder="Search  ( / )" autocomplete="off">
+      <button id="btn-unread" class="icon" title="Show unread only" aria-pressed="false">●</button>
+      <button id="btn-refresh" class="icon" title="Refresh (r)" aria-label="Refresh">⟳</button>
+    </header>
+    <div id="progress"></div>
+    <ul id="items"></ul>
+    <p id="empty" hidden></p>
+  </main>
+
+  <article id="reader">
+    <div id="reader-empty">Select an article<br><small>j / k to move · o open · s star · m read · r refresh</small></div>
+    <div id="reader-body" hidden></div>
+  </article>
+</div>
+
+<dialog id="dlg-add">
+  <form method="dialog" class="dlg-head"><h2>Add sources</h2><button class="icon" aria-label="Close">✕</button></form>
+  <div class="tabs">
+    <button data-tab="catalog" class="on">Catalog</button>
+    <button data-tab="url">By site or feed URL</button>
+  </div>
+  <section id="tab-catalog">
+    <div class="chips" id="lang-chips">
+      <button data-lang="" class="on">All</button>
+      <button data-lang="pl">Polski</button>
+      <button data-lang="en">English</button>
+    </div>
+    <div id="catalog"></div>
+  </section>
+  <section id="tab-url" hidden>
+    <form id="url-form">
+      <input id="url-input" type="text" inputmode="url" placeholder="https://example.com or feed URL" required>
+      <button class="primary">Find feed</button>
+    </form>
+    <p id="url-msg" class="muted"></p>
+  </section>
+</dialog>
+
+<dialog id="dlg-settings">
+  <form method="dialog" class="dlg-head"><h2>Settings</h2><button class="icon" aria-label="Close">✕</button></form>
+  <label class="field">Proxy URL
+    <input id="set-proxy" type="url" placeholder="https://your-worker.workers.dev (empty = same origin)">
+    <small class="muted">Cloudflare Worker from worker.js. Leave empty when running dev_server.py.</small>
+  </label>
+  <label class="field row"><input id="set-unread" type="checkbox"> Show unread only by default</label>
+  <button id="btn-clear" class="danger">Delete all articles</button>
+</dialog>
+
+<div id="toast" role="status"></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

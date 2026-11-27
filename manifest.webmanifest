@@ -1,0 +1,13 @@
+{
+  "name": "Feedlight",
+  "short_name": "Feedlight",
+  "description": "A light, local-first news reader.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b5fff",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
