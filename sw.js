@@ -1,4 +1,4 @@
-const CACHE = "kiosk-v1";
+const CACHE = "kiosk-v2";
 const SHELL = ["./", "index.html", "style.css", "app.js", "sources.js", "manifest.webmanifest", "icons/icon.svg"];
 
 self.addEventListener("install", (e) => {
@@ -11,19 +11,17 @@ self.addEventListener("activate", (e) => {
   );
 });
 
-// App shell: stale-while-revalidate. Feeds/proxy and cross-origin requests go straight to the network.
+// App shell: network-first so updates show up immediately; the cache is the offline fallback.
+// Feeds/proxy and cross-origin requests go straight to the network.
 self.addEventListener("fetch", (e) => {
   const url = new URL(e.request.url);
   if (e.request.method !== "GET" || url.origin !== location.origin || url.pathname === "/proxy") return;
   e.respondWith(
-    caches.match(e.request).then((hit) => {
-      const net = fetch(e.request)
-        .then((res) => {
-          if (res.ok) caches.open(CACHE).then((c) => c.put(e.request, res.clone()));
-          return res;
-        })
-        .catch(() => hit);
-      return hit || net;
-    })
+    fetch(e.request)
+      .then((res) => {
+        if (res.ok) caches.open(CACHE).then((c) => c.put(e.request, res.clone()));
+        return res;
+      })
+      .catch(() => caches.match(e.request))
   );
 });
